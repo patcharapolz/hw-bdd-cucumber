@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.6'
 gem 'rails', '4.2.11'
+# gem 'rails', '5.2.3'
 
 
 gem 'sass-rails', '~> 5.0.3'
@@ -32,3 +33,8 @@ group :production do
   gem 'pg', '~> 0.2'
   gem 'rails_12factor'
 end
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'omniauth-google-oauth2'

@@ -4,8 +4,10 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
+    # movie
+    Movie.create!(title: movie[:title], rating: movie[:rating], release_date: movie[:release_date])
   end
-  pending "Fill in this step in movie_steps.rb"
+  # pending "Fill in this step in movie_steps.rb"
 end
 
 Then /(.*) seed movies should exist/ do | n_seeds |
@@ -18,7 +20,7 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  pending "Fill in this step in movie_steps.rb"
+  # pending "Fill in this step in movie_steps.rb"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -29,18 +31,23 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  pending "Fill in this step in movie_steps.rb"
+  # pending "Fill in this step in movie_steps.rb"
+  ratings = rating_list.split(', ')
+  ratings.each do |rating|
+    uncheck ? uncheck("ratings[#{rating}]") : (check("ratings[#{rating}]"))
+  end
 end
 
 # Part 2, Step 3
 Then /^I should (not )?see the following movies: (.*)$/ do |no, movie_list|
   # Take a look at web_steps.rb Then /^(?:|I )should see "([^"]*)"$/
-  pending "Fill in this step in movie_steps.rb"
+  # pending "Fill in this step in movie_steps.rb"
 end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  pending "Fill in this step in movie_steps.rb"
+  #  "Fill in this step in movie_steps.rb"
+  expect(page).to have_xpath("//tr", count: 11)
 end
 
 ### Utility Steps Just for this assignment.
@@ -48,14 +55,15 @@ end
 Then /^debug$/ do
   # Use this to write "Then debug" in your scenario to open a console.
    require "byebug"; byebug
-  1 # intentionally force debugger context in this method
+  # 1 # intentionally force debugger context in this method
 end
 
 Then /^debug javascript$/ do
   # Use this to write "Then debug" in your scenario to open a JS console
   page.driver.debugger
-  1
+  # 1
 end
+
 
 
 Then /complete the rest of of this scenario/ do
